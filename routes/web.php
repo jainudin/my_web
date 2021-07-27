@@ -27,6 +27,12 @@ Route::delete('/feature_group/{feature_group_id?}','App\Http\Controllers\access\
 Route::post('/feature_group','App\Http\Controllers\access\FeatureGroupController@Setup')->name('feature-group-submit');
 Route::put('/feature_group','App\Http\Controllers\access\FeatureGroupController@Setup')->name('feature-group-submit');
 
+// masteri kategori
+Route::get('/kategori','App\Http\Controllers\master_katalog\KategoriController@index')->name('kategori-list');
+Route::get('/kategori/form/{kategori_id?}','App\Http\Controllers\master_katalog\KategoriController@Form')->name('kategori-form');
+Route::delete('/kategori/{kategori_id?}','App\Http\Controllers\master_katalog\KategoriController@Delete')->name('kategori-delete');
+Route::post('/kategori','App\Http\Controllers\master_katalog\KategoriController@Setup')->name('kategori-submit');
+Route::put('/kategori','App\Http\Controllers\master_katalog\KategoriController@Setup')->name('kategori-submit');
 
 //use App\Http\Controllers\HomeController;
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
