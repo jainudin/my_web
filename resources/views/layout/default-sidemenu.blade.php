@@ -24,6 +24,15 @@
         <i class="menu-icon mdi mdi-television"></i>
         <span class="menu-title">Dashboard</span>
       </a>
+      <div class="collapse" id="ui-basic-access">
+        <ul class="nav flex-column sub-menu">
+          
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/home') }}">Home</a>
+          </li>
+          
+        </ul>
+      </div>
     </li>
 
     <li class="nav-item">
