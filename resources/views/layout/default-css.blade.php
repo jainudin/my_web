@@ -7,3 +7,4 @@
 <!-- End plugin css for this page -->
 <!-- inject:css -->
 <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
