@@ -17,9 +17,13 @@
 
 
 
+
 Auth::routes();
+
+Route::view('/', 'landing-page/landing-page')->name('landing-page');
 // logout
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+
 // acces feature_group
 Route::get('/feature_group','App\Http\Controllers\access\FeatureGroupController@index')->name('feature-group-list');
 Route::get('/feature_group/form/{feature_group_id?}','App\Http\Controllers\access\FeatureGroupController@Form')->name('feature-group-form');
