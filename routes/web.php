@@ -38,6 +38,13 @@ Route::delete('/kategori/{kategori_id?}','App\Http\Controllers\master_katalog\Ka
 Route::post('/kategori','App\Http\Controllers\master_katalog\KategoriController@Setup')->name('kategori-submit');
 Route::put('/kategori','App\Http\Controllers\master_katalog\KategoriController@Setup')->name('kategori-submit');
 
+// master jenis produk
+Route::get('/jenis_produk','App\Http\Controllers\master_katalog\JenisProdukController@index')->name('jenis_produk-list');
+Route::get('/jenis_produk/form/{jenis_produk_id?}','App\Http\Controllers\master_katalog\JenisProdukController@Form')->name('jenis_produk-form');
+Route::post('/jenis_produk','App\Http\Controllers\master_katalog\JenisProdukController@Setup')->name('jenis_produk-submit');
+Route::put('/jenis_produk','App\Http\Controllers\master_katalog\JenisProdukController@Setup')->name('jenis_produk-submit');
+Route::delete('/jenis_produk/{jenis_produk_id?}','App\Http\Controllers\master_katalog\JenisProdukController@Delete')->name('jenis_produk-delete');
+
 //use App\Http\Controllers\HomeController;
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 //Route::view('/', 'master/m_grup_fitur');
