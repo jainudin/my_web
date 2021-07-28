@@ -17,9 +17,13 @@
 
 
 
+
 Auth::routes();
+
+Route::view('/', 'landing-page/landing-page')->name('landing-page');
 // logout
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+
 // acces feature_group
 Route::get('/feature_group','App\Http\Controllers\access\FeatureGroupController@index')->name('feature-group-list');
 Route::get('/feature_group/form/{feature_group_id?}','App\Http\Controllers\access\FeatureGroupController@Form')->name('feature-group-form');
@@ -33,6 +37,13 @@ Route::get('/kategori/form/{kategori_id?}','App\Http\Controllers\master_katalog\
 Route::delete('/kategori/{kategori_id?}','App\Http\Controllers\master_katalog\KategoriController@Delete')->name('kategori-delete');
 Route::post('/kategori','App\Http\Controllers\master_katalog\KategoriController@Setup')->name('kategori-submit');
 Route::put('/kategori','App\Http\Controllers\master_katalog\KategoriController@Setup')->name('kategori-submit');
+
+// master jenis produk
+Route::get('/jenis_produk','App\Http\Controllers\master_katalog\JenisProdukController@index')->name('jenis_produk-list');
+Route::get('/jenis_produk/form/{jenis_produk_id?}','App\Http\Controllers\master_katalog\JenisProdukController@Form')->name('jenis_produk-form');
+Route::post('/jenis_produk','App\Http\Controllers\master_katalog\JenisProdukController@Setup')->name('jenis_produk-submit');
+Route::put('/jenis_produk','App\Http\Controllers\master_katalog\JenisProdukController@Setup')->name('jenis_produk-submit');
+Route::delete('/jenis_produk/{jenis_produk_id?}','App\Http\Controllers\master_katalog\JenisProdukController@Delete')->name('jenis_produk-delete');
 
 //use App\Http\Controllers\HomeController;
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
