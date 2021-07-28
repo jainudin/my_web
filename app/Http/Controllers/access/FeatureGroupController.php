@@ -58,8 +58,6 @@ class FeatureGroupController extends Controller
         $feature_group = null;
 
         
-        
-
         if (! empty($feature_group_id)) {
             $request->validate([
                 'feature_group_name' => 'required',
