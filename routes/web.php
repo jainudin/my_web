@@ -55,7 +55,7 @@ Route::delete('/jenis_produk/{jenis_produk_id?}','App\Http\Controllers\master_ka
 
 // master produk
 Route::get('/produk','App\Http\Controllers\master_katalog\ProdukController@index')->name('produk-list');
-Route::get('/produk/form/{produk_id?}','App\Http\Controllers\master_katalog\JenisProdukController@Form')->name('produk-form');
+Route::get('/produk/form/{produk_id?}','App\Http\Controllers\master_katalog\ProdukController@Form')->name('produk-form');
 Route::post('/produk','App\Http\Controllers\master_katalog\ProdukController@Setup')->name('produk-submit');
 Route::put('/produk','App\Http\Controllers\master_katalog\ProdukController@Setup')->name('produk-submit');
 Route::delete('/produk/{produk_id?}','App\Http\Controllers\master_katalog\ProdukController@Delete')->name('produk-delete');

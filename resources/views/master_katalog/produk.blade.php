@@ -22,7 +22,7 @@
                         <tbody>
                         @foreach ($data as $dt)
                             <tr>
-                                <td>{{ $dt->produk_group_name }}</td>
+                                <td>{{ $dt->produk_name }}</td>
                                 <td>{{ $dt->produk_name }}</td>
                                 <td>{{ ($dt->status_jenis_produk ==1 ? 'Aktif' : 'Non-Aktif')  }}</td>
                                 <td>{{ $dt->path_gambar_produk }}</td>
@@ -43,50 +43,44 @@
     <div class="col-12 stretch-card">
         <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Formulir produk</h4>
-            <form class="forms-sample" method="POST" action="{{ route('produk-submit',[$produk_id]) }}">
+            <h4 class="card-title">Formulir Produk</h4>
+            <form class="forms-sample" method="POST" enctype="multipart/form-data" action="{{ route('produk-submit',[$produk_id]) }}">
                 @if (!empty($produk_id))
                     @method('put')
                 @endif
                 @csrf
                 <div class="form-group row">
-                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">produk group name</label>
+                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Nama Kategori</label>
                     <div class="col-sm-9">
-                        <select name="produk_group_id" id="produk_group_id" class="form-control input-lg">
-                            <option value="">Select produk group</option>
-                            @foreach ($produk_group as $fg)
-                            <option value="{{ $fg->produk_group_id }}" <?php if ($fg->produk_group_id === $produk_group_id) { echo "selected"; }?>>{{ $fg->produk_group_name }}</option>
+                        <select name="kategori_id" id="kategori_id" class="form-control input-lg">
+                            <option value="">Select Kategori</option>
+                            @foreach ($kategori as $k)
+                            <option value="{{ $k->kategori_id }}" <?php if ($k->kategori_id === $kategori_id) { echo "selected"; }?>>{{ $k->nama_kategori }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">produk Name</label>
+                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Nama Produk</label>
                     <div class="col-sm-9">
-                    <input type="text" class="form-control {{ $errors->has('produk_name') ? 'is-invalid' : ''}}" id="produk_name" name="produk_name" placeholder="produk Name" value="{{{ !empty($produk_group_id)?$produk_name : old('produk_name') }}}">
-                    {!! $errors->first('produk_name', '<p class="help-block">:message</p>') !!}
+                    <input type="text" class="form-control {{ $errors->has('produk_name') ? 'is-invalid' : ''}}" id="nama_produk" name="nama_produk" placeholder="Nama Produk" value="{{{ !empty($produk_id)?$nama_produk : old('nama_produk') }}}">
+                    {!! $errors->first('nama_produk', '<p class="help-block">:message</p>') !!}
                     <input type="hidden" class="form-control" id="produk_id" name="produk_id" value="{{{ $produk_id }}}">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">produk Url</label>
+                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Keterangan</label>
                     <div class="col-sm-9">
-                    <input type="text" class="form-control {{ $errors->has('produk_url') ? 'is-invalid' : ''}}" id="produk_url" name="produk_url" placeholder="produk Url" value="{{{ !empty($produk_group_id)?$produk_url : old('produk_url') }}}">
-                    {!! $errors->first('produk_url', '<p class="help-block">:message</p>') !!}
+                    <textarea class="form-control" id="keterangan_produk" name="keterangan_produk" placeholder="keterangan Produk" rows="3">{{{ !empty($produk_id)?$keterangan_produk : old('keterangan_produk')}}}
+                    </textarea>
                     </div>
                 </div>
+                
                 <div class="form-group row">
-                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">produk Icon</label>
+                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Foto Produk</label>
                     <div class="col-sm-9">
-                    <input type="text" class="form-control {{ $errors->has('produk_icon') ? 'is-invalid' : ''}}" id="produk_icon" name="produk_icon" placeholder="produk Icon" value="{{{ !empty($produk_group_id)?$produk_icon : old('produk_icon') }}}">
-                    {!! $errors->first('produk_icon', '<p class="help-block">:message</p>') !!}
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">produk Order</label>
-                    <div class="col-sm-9">
-                    <input type="text" class="form-control {{ $errors->has('produk_order') ? 'is-invalid' : ''}}" id="produk_order" name="produk_order" placeholder="produk Order" value="{{{ !empty($produk_group_id)?$produk_order : old('produk_order') }}}">
-                    {!! $errors->first('produk_order', '<p class="help-block">:message</p>') !!}
+                    <input type="file" class="form-control-file {{ $errors->has('path_gambar_produk') ? 'is-invalid' : ''}}" id="path_gambar_produk" name="path_gambar_produk"  value="{{{ !empty($produk_id)?$path_gambar_produk : old('path_gambar_produk') }}}">
+                    {!! $errors->first('path_gambar_produk', '<p class="help-block">:message</p>') !!}
                     </div>
                 </div>
                 <div class="float-right">
@@ -94,7 +88,7 @@
                     <button type="submit" class="btn btn-success mr-2">Simpan</button>
                 </div>
             </form>
-            @if (!empty($produk_group_id))
+            @if (!empty($produk_id))
             <div class="float-left">
                 <form class="forms-sample" method="POST" action="{{ route('produk-delete',[$produk_id]) }}">
                 @method('delete')
