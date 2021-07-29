@@ -20,8 +20,9 @@ class KategoriController extends Controller
         $response = array();
         $kategori = kategori::orderBy('nama_kategori', 'asc')->get();
         $response['data'] = $kategori;
+        $response['function'] = 'List';
 
-        return View::make('master_katalog/kategori-list', $response);
+        return View::make('master_katalog/kategori', $response);
     }
 
     public function Form($kategori_id = null)
@@ -38,9 +39,10 @@ class KategoriController extends Controller
 
         $response['kategori_id'] = $kategori_id;
         $response['nama_kategori'] = $nama_kategori;
+        $response['function'] = 'Form';
         
 
-        return View::make('master_katalog/kategori-form', $response);
+        return View::make('master_katalog/kategori', $response);
     }
 
     public function Setup(Request $request)

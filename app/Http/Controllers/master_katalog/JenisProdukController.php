@@ -20,8 +20,9 @@ class JenisProdukController extends Controller
         $response = array();
         $jenis_produk = jenis_produk::orderBy('nama_jenis_produk', 'asc')->get();
         $response['data'] = $jenis_produk;
+        $response['function'] = 'List';
 
-        return View::make('master_katalog/jenis_produk-list', $response);
+        return View::make('master_katalog/jenis_produk', $response);
     }
 
     public function Form($jenis_produk_id = null)
@@ -38,9 +39,10 @@ class JenisProdukController extends Controller
 
         $response['jenis_produk_id'] = $jenis_produk_id;
         $response['nama_jenis_produk'] = $nama_jenis_produk;
+        $response['function'] = 'Form';
         
 
-        return View::make('master_katalog/jenis_produk-form', $response);
+        return View::make('master_katalog/jenis_produk', $response);
     }
 
     public function Setup(Request $request)
