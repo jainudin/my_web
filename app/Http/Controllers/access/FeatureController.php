@@ -26,8 +26,8 @@ class FeatureController extends Controller
                     ->orderBy('feature.feature_name', 'asc')
                     ->get();
         $response['data'] = $feature;
-
-        return View::make('access/feature-list', $response);
+        $response['function'] = 'List';
+        return View::make('access/feature', $response);
     }
 
     public function Form($feature_id = null)
@@ -60,8 +60,8 @@ class FeatureController extends Controller
         $response['feature_icon'] = $feature_icon;
         $response['feature_group'] = $feature_group;
         $response['feature_order'] = $feature_order;
-        
-        return View('access/feature-form', $response);
+        $response['function'] = 'Form';
+        return View('access/feature', $response);
     }
 
     
