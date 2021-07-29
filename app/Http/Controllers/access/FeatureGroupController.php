@@ -62,7 +62,7 @@ class FeatureGroupController extends Controller
         if (! empty($feature_group_id)) {
             $request->validate([
                 'feature_group_name' => 'required',
-                'feature_group_order' => 'required|numeric|max:3',
+                'feature_group_order' => 'required|numeric',
             ]);
     
             $feature_group = FeatureGroup::where('feature_group_id', $feature_group_id)->first();
@@ -71,7 +71,7 @@ class FeatureGroupController extends Controller
         if (empty($feature_group)) {
             $request->validate([
                 'feature_group_name' => 'required|unique:feature_group,feature_group_name',
-                'feature_group_order' => 'required|numeric|max:3',
+                'feature_group_order' => 'required|numeric',
             ]);
     
             $feature_group = new FeatureGroup();
