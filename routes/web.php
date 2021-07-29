@@ -31,6 +31,14 @@ Route::delete('/feature_group/{feature_group_id?}','App\Http\Controllers\access\
 Route::post('/feature_group','App\Http\Controllers\access\FeatureGroupController@Setup')->name('feature-group-submit');
 Route::put('/feature_group','App\Http\Controllers\access\FeatureGroupController@Setup')->name('feature-group-submit');
 
+// acces feature
+Route::get('/feature','App\Http\Controllers\access\FeatureController@index')->name('feature-list');
+Route::get('/feature/form/{feature_group_id?}','App\Http\Controllers\access\FeatureController@Form')->name('feature-form');
+Route::delete('/feature/{feature_group_id?}','App\Http\Controllers\access\FeatureController@Delete')->name('feature-delete');
+Route::post('/feature','App\Http\Controllers\access\FeatureController@Setup')->name('feature-submit');
+Route::put('/feature','App\Http\Controllers\access\FeatureController@Setup')->name('feature-submit');
+
+
 // masteri kategori
 Route::get('/kategori','App\Http\Controllers\master_katalog\KategoriController@index')->name('kategori-list');
 Route::get('/kategori/form/{kategori_id?}','App\Http\Controllers\master_katalog\KategoriController@Form')->name('kategori-form');
