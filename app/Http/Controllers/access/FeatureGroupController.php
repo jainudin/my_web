@@ -22,9 +22,9 @@ class FeatureGroupController extends Controller
         $response = array();
         $feature_group = FeatureGroup::orderBy('feature_group_name', 'asc')->get();
         $response['data'] = $feature_group;
-        
+        $response['function'] = 'List';
 
-        return View::make('access/feature-group-list', $response);
+        return View::make('access/feature-group', $response);
     }
 
     public function Form($feature_group_id = null)
@@ -44,8 +44,9 @@ class FeatureGroupController extends Controller
         $response['feature_group_id'] = $feature_group_id;
         $response['feature_group_name'] = $feature_group_name;
         $response['feature_group_order'] = $feature_group_order;
-        
-        return View('access/feature-group-form', $response);
+        $response['function'] = 'Form';
+
+        return View('access/feature-group', $response);
     }
 
    
