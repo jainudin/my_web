@@ -60,6 +60,13 @@ Route::post('/produk','App\Http\Controllers\master_katalog\ProdukController@Setu
 Route::put('/produk','App\Http\Controllers\master_katalog\ProdukController@Setup')->name('produk-submit');
 Route::delete('/produk/{produk_id?}','App\Http\Controllers\master_katalog\ProdukController@Delete')->name('produk-delete');
 
+// master jenis sosial
+Route::get('/jenis_sosial_media','App\Http\Controllers\kontak\JenisSosialMediaController@index')->name('jenis_sosial_media-list');
+Route::get('/jenis_sosial_media/form/{jenis_sosial_media_id?}','App\Http\Controllers\kontak\JenisSosialMediaController@Form')->name('jenis_sosial_media-form');
+Route::post('/jenis_sosial_media','App\Http\Controllers\kontak\JenisSosialMediaController@Setup')->name('jenis_sosial_media-submit');
+Route::put('/jenis_sosial_media','App\Http\Controllers\kontak\JenisSosialMediaController@Setup')->name('jenis_sosial_media-submit');
+Route::delete('/jenis_sosial_media/{jenis_sosial_media_id?}','App\Http\Controllers\kontak\JenisSosialMediaController@Delete')->name('jenis_sosial_media-delete');
+
 
 //use App\Http\Controllers\HomeController;
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
