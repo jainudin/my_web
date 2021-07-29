@@ -40,12 +40,14 @@ class FeatureController extends Controller
         $feature_name = '';
         $feature_url = '';
         $feature_icon = '';
+        $feature_order = '';
         if (! empty($feature_id)) {
             $feature = feature::where('feature_id', $feature_id)->first();
             $feature_group_id = empty($feature->feature_group_id) ? '' : $feature->feature_group_id;
             $feature_name = empty($feature->feature_name) ? '' : $feature->feature_name;
             $feature_url = empty($feature->feature_url) ? '' : $feature->feature_url;
             $feature_icon = empty($feature->feature_icon) ? '' : $feature->feature_icon;
+            $feature_order = empty($feature->feature_order) ? '' : $feature->feature_order;
         }
 
         $feature_group = FeatureGroup::orderBy('feature_group_name', 'asc')->get();
@@ -57,6 +59,7 @@ class FeatureController extends Controller
         $response['feature_url'] = $feature_url;
         $response['feature_icon'] = $feature_icon;
         $response['feature_group'] = $feature_group;
+        $response['feature_order'] = $feature_order;
         
         return View('access/feature-form', $response);
     }
@@ -71,6 +74,7 @@ class FeatureController extends Controller
         $feature_name = $request->input('feature_name', '');
         $feature_url = $request->input('feature_url', '');
         $feature_icon = $request->input('feature_icon', '');
+        $feature_order = $request->input('feature_order', '');
         $feature = null;
 
         if (! empty($feature_id)) {
@@ -85,6 +89,7 @@ class FeatureController extends Controller
         $feature->feature_url = $feature_url;
         $feature->feature_icon = $feature_icon;
         $feature->feature_name = $feature_name;
+        $feature->feature_order = $feature_order;
         $feature->save();
 
         return Redirect::to('/feature');

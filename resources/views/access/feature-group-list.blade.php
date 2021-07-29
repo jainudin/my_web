@@ -5,7 +5,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Kecamatan <a class="float-right" href="{{{ URL::route('feature-group-form') }}}"><button type="button" class="btn btn-sm btn-primary">Tambah</button></a></h4>
+                <h4 class="card-title">Feature Group <a class="float-right" href="{{{ URL::route('feature-group-form') }}}"><button type="button" class="btn btn-sm btn-primary">Tambah</button></a></h4>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>

@@ -41,8 +41,15 @@
                 <div class="form-group row">
                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Feature Icon</label>
                     <div class="col-sm-9">
-                    <input type="text" class="form-control {{ $errors->has('feature_icon') ? 'is-invalid' : ''}}" id="feature_icon" name="feature_icon" placeholder="Feature group Order" value="{{{ !empty($feature_group_id)?$feature_icon : old('feature_icon') }}}">
+                    <input type="text" class="form-control {{ $errors->has('feature_icon') ? 'is-invalid' : ''}}" id="feature_icon" name="feature_icon" placeholder="Feature Icon" value="{{{ !empty($feature_group_id)?$feature_icon : old('feature_icon') }}}">
                     {!! $errors->first('feature_icon', '<p class="help-block">:message</p>') !!}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Feature Order</label>
+                    <div class="col-sm-9">
+                    <input type="text" class="form-control {{ $errors->has('feature_order') ? 'is-invalid' : ''}}" id="feature_order" name="feature_order" placeholder="Feature Order" value="{{{ !empty($feature_group_id)?$feature_order : old('feature_order') }}}">
+                    {!! $errors->first('feature_order', '<p class="help-block">:message</p>') !!}
                     </div>
                 </div>
                 <div class="float-right">
