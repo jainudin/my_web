@@ -59,7 +59,7 @@ Route::get('/produk/form/{produk_id?}','App\Http\Controllers\master_katalog\Prod
 Route::post('/produk','App\Http\Controllers\master_katalog\ProdukController@Setup')->name('produk-submit');
 Route::put('/produk','App\Http\Controllers\master_katalog\ProdukController@Setup')->name('produk-submit');
 Route::delete('/produk/{produk_id?}','App\Http\Controllers\master_katalog\ProdukController@Delete')->name('produk-delete');
-
+Route::get('image/{produk_id?}','App\Http\Controllers\master_katalog\ProdukController@getPubliclyStorgeFile')->name('image-file');
 // master jenis sosial
 Route::get('/jenis_sosial_media','App\Http\Controllers\kontak\JenisSosialMediaController@index')->name('jenis_sosial_media-list');
 Route::get('/jenis_sosial_media/form/{jenis_sosial_media_id?}','App\Http\Controllers\kontak\JenisSosialMediaController@Form')->name('jenis_sosial_media-form');

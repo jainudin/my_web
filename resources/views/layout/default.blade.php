@@ -15,18 +15,20 @@
 </head>
 
 <body>
-  <div class="container-scroller">
-    <!-- partial:../../partials/_navbar.html -->
-    @include('layout.default-headmenu')
-    <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
-      <!-- partial:../../partials/_sidebar.html -->
-      @include('layout.default-sidemenu')
+<div id="wrapper">
+@include('layout.default-sidemenu')
       <!-- partial -->
-      <div class="main-panel">
-        <div class="content-wrapper">
+<div id="content-wrapper" class="d-flex flex-column">
+    
+    <!-- partial -->
+    <div id="content">
+      
+      @include('layout.default-headmenu')
+      <div class="container-fluid">
+        
           @yield('content')
-        </div>
+
+          
         <!-- content-wrapper ends -->
         <!-- partial:../../partials/_footer.html -->
         <footer class="footer">
@@ -38,6 +40,7 @@
     </div>
     <!-- page-body-wrapper ends -->
   </div>
+</div>
   <!-- container-scroller -->
   <!-- plugins:js -->
   @include('layout.default-js')

@@ -12,6 +12,7 @@ use Session;
 use App;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Ramsey\Uuid\Uuid;
 class ProdukController extends Controller
 {
     // protected $viewRoles = ['super_admin'];
@@ -42,6 +43,7 @@ class ProdukController extends Controller
         if (! empty($produk_id)) {
 
             $produk = produk::where('produk_id', $produk_id)->first();
+            $produk_id = empty($produk->produk_id) ? '' : $produk->produk_id;
             $nama_produk = empty($produk->nama_produk) ? '' : $produk->nama_produk;
             $kategori_id = empty($produk->kategori_id) ? '' : $produk->kategori_id;
             $path_gambar_produk = empty($produk->path_gambar_produk) ? '' : $produk->path_gambar_produk;
@@ -53,8 +55,8 @@ class ProdukController extends Controller
         $response['produk_id'] = $produk_id;
         $response['kategori_id'] = $kategori_id;
         $response['nama_produk'] = $nama_produk;
-        $response['path_gambar_produk'] = $nama_produk;
-        $response['keterangan_produk'] = $nama_produk;
+        $response['path_gambar_produk'] = $path_gambar_produk;
+        $response['keterangan_produk'] = $keterangan_produk;
         $response['status_produk'] = '1';
         $response['kategori'] = $kategori;
         $response['function'] = 'Form';
@@ -66,7 +68,7 @@ class ProdukController extends Controller
     {
         // $this->checkRole();
         
-        $produk_id = $request->input('feature_id', '');
+        $produk_id = $request->input('produk_id', '');
         $kategori_id = $request->input('kategori_id', '');
         $nama_produk = $request->input('nama_produk', '');
         $path_gambar_produk = $request->input('path_gambar_produk', '');
@@ -88,25 +90,43 @@ class ProdukController extends Controller
                 'path_gambar_produk' =>'required'
             ]);
             $produk = new produk();
+            $produk_id = Uuid::uuid4()->getHex();
         }
 
         //Upload Image
-        $path = $request->file('path_gambar_produk')->storeAs('file_upload/produk', $produk_id);
-        //$request->path_gambar_produk->storeAs('file_upload/produk', 'asassas.png');
         
-        //$path = Storage::putFile('file_upload/produk', $request->file('path_gambar_produk'));
-
+        
+        $path = $request->file('path_gambar_produk')->storeAs('file_upload/produk', $produk_id . '.png');
+         
         $produk->produk_id = $produk_id;
         $produk->nama_produk = $nama_produk;
         $produk->keterangan_produk = $keterangan_produk;
         $produk->kategori_id = $kategori_id;
-        $produk->path_gambar_produk = $produk_id;
-        
+        $produk->path_gambar_produk =  $produk_id . '.png';
         $produk->status_produk = '1';
         $produk->save();
 
         return Redirect::to('/produk');
     }
+
+    public function getPubliclyStorgeFile($filename)
+    {
+        $path = storage_path('app/file_upload/produk/'. $filename);
+
+        if (!File::exists($path)) {
+            abort(404);
+        }
+
+        $file = File::get($path);
+        $type = File::mimeType($path);
+
+        $response = Response::make($file, 200);
+
+        $response->header("Content-Type", $type);
+
+        return $response;
+
+    }	
 
     public function Delete($produk_id = null)
     {
