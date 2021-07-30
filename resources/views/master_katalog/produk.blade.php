@@ -27,7 +27,7 @@
                                 <td>{{ ($dt->status_jenis_produk ==1 ? 'Aktif' : 'Non-Aktif')  }}</td>
                                 <td>
                                     <div class="thumbnail">
-                                        <img class="img img-fluid" src="{{ asset("storage/file_upload/produk/$dt->path_gambar_produk") }}" alt="profile Pic" style="width:150px">
+                                        <img class="img img-fluid" src="{{ asset("file_upload/produk/$dt->path_gambar_produk") }}" alt="profile Pic" style="width:150px">
                                     </div>
                                 </td>
                                 <td><a href="<?php echo URL::route('produk-form') . "/" . $dt->produk_id; ?>" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>Edit</a></td>

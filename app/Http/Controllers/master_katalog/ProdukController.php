@@ -96,7 +96,7 @@ class ProdukController extends Controller
         //Upload Image
         
         
-        $path = $request->file('path_gambar_produk')->storeAs('file_upload/produk', $produk_id . '.png');
+        $path = $request->file('path_gambar_produk')->move(public_path('file_upload/produk'), $produk_id . '.png');
          
         $produk->produk_id = $produk_id;
         $produk->nama_produk = $nama_produk;
@@ -109,24 +109,7 @@ class ProdukController extends Controller
         return Redirect::to('/produk');
     }
 
-    public function getPubliclyStorgeFile($filename)
-    {
-        $path = storage_path('app/file_upload/produk/'. $filename);
-
-        if (!File::exists($path)) {
-            abort(404);
-        }
-
-        $file = File::get($path);
-        $type = File::mimeType($path);
-
-        $response = Response::make($file, 200);
-
-        $response->header("Content-Type", $type);
-
-        return $response;
-
-    }	
+    
 
     public function Delete($produk_id = null)
     {
