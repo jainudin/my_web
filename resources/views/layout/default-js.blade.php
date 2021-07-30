@@ -24,7 +24,9 @@
         $(document).ready(function(){
             var url = location.pathname;
             var arr =url.split('/');
-            var id = arr[1];
+            var name = arr[1];
+            var id = arr[1].replace(new RegExp('_', 'g'), ' ');
+            //alert(id);
             $('.collapse').removeClass('show');
             $('.collapse-item').removeClass('active');
             @foreach(App\Models\Feature::orderBy('feature_name','asc')->get() as $menuItem)
@@ -32,7 +34,7 @@
                 if(id == '{{ strtolower($menuItem->feature_name) }}')
                 {
                  $('#collapse_{{ $menuItem->feature_group_id }}').addClass('show');
-                 $('#collapse_item_'+id).addClass('active');
+                 $('#collapse_item_{{ strtolower($menuItem->feature_id) }}').addClass('active');
                 }
 
             @endforeach

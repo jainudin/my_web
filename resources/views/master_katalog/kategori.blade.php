@@ -13,6 +13,8 @@
                         <thead>
                             <tr>
                                 <th>Nama Kategori</th>
+                                <th>Gambar Kategori</th>
+                                <th>Keterangan kategori</th>
                                 <th>Status Kategori</th>
                                 <th>Aksi</th>
                             </tr>
@@ -21,6 +23,12 @@
                         @foreach ($data as $dt)
                             <tr>
                                 <td>{{ $dt->nama_kategori }}</td>
+                                <td>
+                                    <div class="thumbnail">
+                                        <img class="img img-fluid" src="{{ asset("file_upload/kategori/$dt->path_gambar_kategori") }}" alt="profile Pic" style="width:150px">
+                                    </div>
+                                </td>
+                                <td>{{ ($dt->keterangan_kategori)  }}</td>
                                 <td>{{ ($dt->status_kategori ==1 ? 'Aktif' : 'Non-Aktif')  }}</td>
                                 <td><a href="<?php echo URL::route('kategori-form') . "/" . $dt->kategori_id; ?>" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>Edit</a></td>
                             </tr>
@@ -40,7 +48,7 @@
         <div class="card">
         <div class="card-body">
             <h4 class="card-title">Formulir Kategori</h4>
-            <form class="forms-sample" method="POST" action="{{ route('kategori-submit',[$kategori_id]) }}">
+            <form class="forms-sample" method="POST" enctype="multipart/form-data" action="{{ route('kategori-submit',[$kategori_id]) }}">
                 @if (!empty($kategori_id))
                     @method('put')
                 @endif
@@ -53,7 +61,28 @@
                     <input type="hidden" class="form-control" id="kategori_id" name="kategori_id" value="{{{ $kategori_id }}}">
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Kategori Order</label>
+                    <div class="col-sm-9">
+                    <input type="text" class="form-control {{ $errors->has('order_kategori') ? 'is-invalid' : ''}}" id="order_kategori" name="order_kategori" placeholder="Feature Order" value="{{{ !empty($kategori_id)?$order_kategori : old('order_kategori') }}}">
+                    {!! $errors->first('order_kategori', '<p class="help-block">:message</p>') !!}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Keterangan</label>
+                    <div class="col-sm-9">
+                    <textarea class="form-control" id="keterangan_kategori" name="keterangan_kategori" placeholder="keterangan kategori" rows="3">{{{ !empty($kategori_id)?$keterangan_kategori : old('keterangan_kategori')}}}
+                    </textarea>
+                    </div>
+                </div>
                 
+                <div class="form-group row">
+                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Foto kategori</label>
+                    <div class="col-sm-9">
+                    <input type="file" class="form-control-file {{ $errors->has('path_gambar_kategori') ? 'is-invalid' : ''}}" id="path_gambar_kategori" name="path_gambar_kategori"  value="{{{ !empty($kategori_id)?$path_gambar_kategori : old('path_gambar_kategori') }}}">
+                    {!! $errors->first('path_gambar_kategori', '<p class="help-block">:message</p>') !!}
+                    </div>
+                </div>
                 <div class="float-right">
                     <a href="{{{ route('kategori-list')}}}"><button type="button" class="btn btn-light">Batal</button></a>
                     <button type="submit" class="btn btn-success mr-2">Simpan</button>

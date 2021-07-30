@@ -19,7 +19,7 @@
         <div id="collapse_{{ str_replace(' ', '-', $menuItem->feature_group_id)  }}" class="collapse" aria-labelledby="headingTwo" data-parent="#collapse_{{ str_replace(' ', '-', $menuItem->feature_group_id)  }}">
             <div class="bg-white py-2 collapse-inner rounded">
             @foreach(App\Models\feature::where('feature_group_id',$menuItem->feature_group_id)->get() as $subMenuItem)
-                <a class="collapse-item" id="collapse_item_{{ Str::lower($subMenuItem->feature_name) }}" href="{{ url($subMenuItem->feature_url) }}">
+                <a class="collapse-item" id="collapse_item_{{ $subMenuItem->feature_id }}" href="{{ url($subMenuItem->feature_url) }}">
                 <i class="{{ $subMenuItem->feature_icon  }}"></i>
                   {{ $subMenuItem->feature_name }}
                 </a>

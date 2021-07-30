@@ -94,8 +94,6 @@ class ProdukController extends Controller
         }
 
         //Upload Image
-        
-        
         $path = $request->file('path_gambar_produk')->move(public_path('file_upload/produk'), $produk_id . '.png');
          
         $produk->produk_id = $produk_id;
