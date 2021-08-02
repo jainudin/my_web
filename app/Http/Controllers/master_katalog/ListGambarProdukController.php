@@ -46,31 +46,32 @@ class ListGambarProdukController extends Controller
     {
         // $this->checkRole();
 
-        
+        $test;
         $produk_id = $request->input('produk_id', '');
-                      
+        $list_gambar_produk_id =$request->input('list_gambar_produk_id', '');
         $list_gambar_produk = null;
 
         if (! empty($list_gambar_produk_id)) {
             $request->validate([
                 'nama_list_gambar_produk' => 'required'
             ]);
-            $list_gambar_produk = list_gambar_produk::where('list_gambar_produk_id', $list_gambar_produk_id)->first();
+            $list_gambar_produk = list_gambar_produk::test('list_gambar_produk_id', $list_gambar_produk_id)->first();
         }
 
         if (empty($list_gambar_produk)) {
             $request->validate([
-                'nama_list_gambar_produk' => 'required|unique:list_gambar_produk,nama_list_gambar_produk'
+                'path_list_gambar_produk' => 'required|unique:list_gambar_produk,path_list_gambar_produk'
             ]);
             $list_gambar_produk = new list_gambar_produk();
             $list_gambar_produk_id = Uuid::uuid4()->getHex();
         }
 
         //Upload Image
-        $filePath = public_path('file_upload/list_gambar_produk/thumbnails');
-        $image = $request->file('path_gambar_list_gambar_produk');
-        $img = Image::make($image->path());
+        $filePath = public_path('file_upload/list_gambar_produk');
+        $image = $request->file('path_list_gambar_produk');
+        
         if (!file_exists($filePath)) {
+            $img = Image::make($image->path());
             mkdir($filePath, 666, true);
             $img->resize(400, 200, function ($const) {
                 $const->aspectRatio();
@@ -78,35 +79,32 @@ class ListGambarProdukController extends Controller
         }
         else
         {
+            $img = Image::make($image->path());
             $img->resize(400, 250, function ($const) {
                 $const->aspectRatio();
             })->save($filePath.'/'.$list_gambar_produk_id . '.png');
         }
-
-        
-        $path = $request->file('path_gambar_list_gambar_produk')->move(public_path('file_upload/list_gambar_produk'), $list_gambar_produk_id . '.png');
-
+      
         $list_gambar_produk->list_gambar_produk_id = $list_gambar_produk_id;
-        $list_gambar_produk->nama_list_gambar_produk = $nama_list_gambar_produk;
-        $list_gambar_produk->keterangan_list_gambar_produk = $keterangan_list_gambar_produk;
-        $list_gambar_produk->order_list_gambar_produk = $order_list_gambar_produk;
-        $list_gambar_produk->path_gambar_list_gambar_produk = $list_gambar_produk_id . ".png";
-        $list_gambar_produk->status_list_gambar_produk = '1';
+        $list_gambar_produk->produk_id = $produk_id;
+        $list_gambar_produk->path_list_gambar_produk = $list_gambar_produk_id . ".png";
+        $list_gambar_produk->nama_file_image = $list_gambar_produk_id . ".png";
+        
         $list_gambar_produk->save();
 
-        return Redirect::to('/list_gambar_produk');
+        return Redirect::to('/produk/list_gambar_produk/'.$produk_id);
     }
 
-    public function Delete($list_gambar_produk_id = null)
+    public function Delete($list_gambar_produk_id = null , $produk_id = null)
     {
-        // $this->checkRole();
+    // $this->checkRole();
 
         if (! empty($list_gambar_produk_id)) {
             $list_gambar_produk = list_gambar_produk::find($list_gambar_produk_id);
             $list_gambar_produk->delete();
         }
 
-        return Redirect::to('/list_gambar_produk');
+        return Redirect::to('/produk/list_gambar_produk/'.$produk_id);
     }
 
     // protected function checkRole()

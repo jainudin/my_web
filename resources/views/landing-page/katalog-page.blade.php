@@ -1,3 +1,14 @@
+<style>
+                img {
+                width: 100%;
+                height: 200px;
+                }
+
+                .img--cover {
+                object-fit: cover;
+                }
+            </style>
+
 <section class="page-section portfolio" id="katalog">
             <div class="container">
                 <!-- Portfolio Section Heading-->
@@ -18,7 +29,7 @@
                                 <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                     <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="{{ asset('file_upload/kategori/thumbnails/'.$menuItem->path_gambar_kategori) }}" alt="..." />
+                                <img class="img--cover" src="{{ asset('file_upload/kategori/thumbnails/'.$menuItem->path_gambar_kategori) }}" alt="..." />
                                 <figcaption>{{ $menuItem->nama_kategori }}</figcaption>
                             </div>
                             <div class="container">

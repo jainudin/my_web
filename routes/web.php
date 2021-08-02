@@ -64,9 +64,9 @@ Route::delete('/produk/{produk_id?}','App\Http\Controllers\master_katalog\Produk
 // master list foto produk
 Route::get('/produk/list_gambar_produk/{produk_id?}','App\Http\Controllers\master_katalog\ListGambarProdukController@index')->name('list_gambar_produk-list');
 Route::get('/produk/list_gambar_produk/form/{produk_id?}','App\Http\Controllers\master_katalog\ListGambarProdukController@Form')->name('list_gambar_produk-form');
-Route::post('/produk/list_gambar_produk','App\Http\Controllers\master_katalog\ListGambarProdukController@Setup')->name('list_gambar_produk-submit');
-Route::put('/produk/list_gambar_produk','App\Http\Controllers\master_katalog\ListGambarProdukController@Setup')->name('list_gambar_produk-submit');
-Route::delete('/produk/list_gambar_produk/{list_gambar_produk_id?}','App\Http\Controllers\master_katalog\ListGambarProdukController@Delete')->name('list_gambar_produk-delete');
+Route::post('/produk/list_gambar_produk/{produk_id?}','App\Http\Controllers\master_katalog\ListGambarProdukController@Setup')->name('list_gambar_produk-submit');
+// Route::put('/produk/list_gambar_produk','App\Http\Controllers\master_katalog\ListGambarProdukController@Setup')->name('list_gambar_produk-submit');
+ Route::get('/list_gambar_produk_id/{list_gambar_produk_id?}/produk_id/{produk_id?}','App\Http\Controllers\master_katalog\ListGambarProdukController@Delete')->name('list_gambar_produk-delete');
 
 
 // master jenis sosial
