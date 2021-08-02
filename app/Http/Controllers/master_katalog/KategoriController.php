@@ -70,14 +70,17 @@ class KategoriController extends Controller
 
         if (! empty($kategori_id)) {
             $request->validate([
-                'nama_kategori' => 'required'
+                'nama_kategori' =>'required',
+                'path_gambar_kategori' => ['required','dimensions:min_width=400,min_height=250,max_width=800,max_height=300']
+           
             ]);
             $kategori = kategori::where('kategori_id', $kategori_id)->first();
         }
 
         if (empty($kategori)) {
             $request->validate([
-                'nama_kategori' => 'required|unique:kategori,nama_kategori'
+                'nama_kategori' =>'required',
+                'path_gambar_kategori' => ['required','dimensions:min_width=400,min_height=250,max_width=800,max_height=300']
             ]);
             $kategori = new kategori();
             $kategori_id = Uuid::uuid4()->getHex();
@@ -110,6 +113,9 @@ class KategoriController extends Controller
         $kategori->path_gambar_kategori = $kategori_id . ".png";
         $kategori->status_kategori = '1';
         $kategori->save();
+        $kategori->save();
+        $kategori->save();
+        
 
         return Redirect::to('/kategori');
     }
