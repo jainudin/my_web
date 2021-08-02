@@ -14,6 +14,7 @@
                             <tr>
                                 <th>Nama Perusahaan</th>
                                 <th>Alamat Perusahaan</th>
+                                <th>Logo Perusahaan</th>
                                 <th>Website Perusahaan</th>
                                 <th>e-mail Perusahaan</th>
                                 <th>Status Perusahaan</th>
@@ -25,6 +26,11 @@
                             <tr>
                                 <td>{{ $dt->nama_perusahaan }}</td>
                                 <td>{{ $dt->alamat_perusahaan }}</td>
+                                <td>
+                                    <div class="thumbnail">
+                                        <img class="img img-fluid" src="{{ asset("file_upload/profil_perusahaan/$dt->path_logo_perusahaan") }}" alt="profile Pic" style="width:150px">
+                                    </div>
+                                </td>
                                 <td>{{ $dt->website_perusahaan }}</td>
                                 <td>{{ $dt->email_perusahaan }}</td>
                                 <td>{{ ($dt->status ==1 ? 'Aktif' : 'Non-Aktif')  }}</td>
@@ -46,7 +52,7 @@
         <div class="card">
         <div class="card-body">
             <h4 class="card-title">Formulir Profil Perusahaan</h4>
-            <form class="forms-sample" method="POST" action="{{ route('profil_perusahaan-submit',[$profil_perusahaan_id]) }}">
+            <form class="forms-sample" method="POST" enctype="multipart/form-data" action="{{ route('profil_perusahaan-submit',[$profil_perusahaan_id]) }}">
                 @if (!empty($profil_perusahaan_id))
                     @method('put')
                 @endif
@@ -67,16 +73,9 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Foto Perusahaan</label>
-                    <div class="col-sm-9">
-                    <input type="text" class="form-control {{ $errors->has('path_foto_perusahaan') ? 'is-invalid' : ''}}" id="path_foto_perusahaan" name="path_foto_perusahaan" placeholder="Foto Perusahaan" value="{{{ !empty($profil_perusahaan_id)?$path_foto_perusahaan : old('path_foto_perusahaan') }}}">
-                    {!! $errors->first('path_foto_perusahaan', '<p class="help-block">:message</p>') !!}
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Logo Perusahaan</label>
                     <div class="col-sm-9">
-                    <input type="text" class="form-control {{ $errors->has('path_logo_perusahaan') ? 'is-invalid' : ''}}" id="path_logo_perusahaan" name="path_logo_perusahaan" placeholder="Logo Perusahaan" value="{{{ !empty($profil_perusahaan_id)?$path_logo_perusahaan : old('path_logo_perusahaan') }}}">
+                    <input type="file" class="form-control-file {{ $errors->has('path_logo_perusahaan') ? 'is-invalid' : ''}}" id="path_logo_perusahaan" name="path_logo_perusahaan"  value="{{{ !empty($profil_perusahaan_id)?$path_logo_perusahaan : old('path_logo_perusahaan') }}}">
                     {!! $errors->first('path_logo_perusahaan', '<p class="help-block">:message</p>') !!}
                     </div>
                 </div>
