@@ -7,7 +7,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">produk <a class="float-right" href="{{{ URL::route('produk-form') }}}"><button type="button" class="btn btn-sm btn-primary">Tambah</button></a></h4>
+                <h4 class="card-title">produk <a class="float-right" href="{{{ URL::route('produk-form')}}}"><button type="button" class="btn btn-sm btn-primary">Tambah</button></a></h4>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -16,6 +16,7 @@
                                 <th>Nama produk</th>
                                 <th>Status Produk</th>
                                 <th>Foto Produk</th>
+                                <th>List Foto Produk</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -24,12 +25,13 @@
                             <tr>
                                 <td>{{ $dt->nama_kategori }}</td>
                                 <td>{{ $dt->nama_produk }}</td>
-                                <td>{{ ($dt->status_jenis_produk ==1 ? 'Aktif' : 'Non-Aktif')  }}</td>
+                                <td>{{ ($dt->status_produk ==1 ? 'Aktif' : 'Non-Aktif')  }}</td>
                                 <td>
                                     <div class="thumbnail">
                                         <img class="img img-fluid" src="{{ asset("file_upload/produk/$dt->path_gambar_produk") }}" alt="profile Pic" style="width:150px">
                                     </div>
                                 </td>
+                                <td><a href="<?php echo URL::route('list_gambar_produk-list') . "/" . $dt->produk_id; ?>" class="btn btn-primary btn-sm"><i class="fa fa-list"></i>Edit</a></td>
                                 <td><a href="<?php echo URL::route('produk-form') . "/" . $dt->produk_id; ?>" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>Edit</a></td>
                             </tr>
                         @endforeach

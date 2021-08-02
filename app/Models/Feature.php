@@ -9,5 +9,5 @@ class feature extends Model
     use UsesUuid;
 
     protected $primaryKey = 'feature_id';
-    protected $table = 'featureP';
+    protected $table = 'feature';
 }

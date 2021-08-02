@@ -29,7 +29,7 @@
                                     </div>
                                 </td>
                                 <td>{{ ($dt->keterangan_kategori)  }}</td>
-                                <td>{{ ($dt->status_kategori ==1 ? 'Aktif' : 'Non-Aktif')  }}</td>
+                                <td>{{ ($dt->status_kategori == '1' ? 'Aktif' : 'Non-Aktif')  }}</td>
                                 <td><a href="<?php echo URL::route('kategori-form') . "/" . $dt->kategori_id; ?>" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>Edit</a></td>
                             </tr>
                         @endforeach
